@@ -1,5 +1,6 @@
 ## Setup
 - You must install `direnv` if you want to make use of the `.envrc` file.
+- You must install the claude code app ( https://github.com/apps/claude ) in github if you wish to use the github actions
   
 ### Build
 
