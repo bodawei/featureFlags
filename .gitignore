@@ -1,0 +1,26 @@
+# Maven build output
+target/
+*.class
+
+# Maven wrapper (if added later)
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Spring Boot devtools restart trigger
+.reloadtrigger
+
+# Logs
+*.log
+logs/
