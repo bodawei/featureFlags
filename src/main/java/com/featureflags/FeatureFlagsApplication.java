@@ -8,4 +8,8 @@ public class FeatureFlagsApplication {
     public static void main(String[] args) {
         SpringApplication.run(FeatureFlagsApplication.class, args);
     }
+
+    public static void foo() {
+       System.out.println("zoiks, dude.");
+}
 }
