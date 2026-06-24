@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({FlagNotFoundException.class, EnvironmentNotFoundException.class, VariantNotFoundException.class})
-    public ResponseEntity<ProblemDetail> handleNotFound(RuntimeException ex) {
+    public ResponseEntity<ProblemDetail> handleNotFound(FeatureFlagDomainException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage()));
     }
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({EnvironmentAlreadyExistsException.class, OptimisticConcurrencyException.class})
-    public ResponseEntity<ProblemDetail> handleConflict(RuntimeException ex) {
+    public ResponseEntity<ProblemDetail> handleConflict(FeatureFlagDomainException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage()));
     }

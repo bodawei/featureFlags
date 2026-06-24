@@ -16,18 +16,20 @@ public class InMemoryEventStore implements EventStore {
     @Override
     public void append(UUID aggregateId, List<DomainEvent> events, long expectedVersion) {
         store.compute(aggregateId, (id, existing) -> {
-            List<DomainEvent> current = existing != null ? existing : new ArrayList<>();
-            if (current.size() != expectedVersion) {
-                throw new OptimisticConcurrencyException(aggregateId, expectedVersion, current.size());
+            int currentSize = existing != null ? existing.size() : 0;
+            if (currentSize != expectedVersion) {
+                throw new OptimisticConcurrencyException(aggregateId, expectedVersion, currentSize);
             }
-            current.addAll(events);
-            return current;
+            List<DomainEvent> updated = new ArrayList<>(currentSize + events.size());
+            if (existing != null) updated.addAll(existing);
+            updated.addAll(events);
+            return List.copyOf(updated);
         });
     }
 
     @Override
     public EventStream load(UUID aggregateId) {
-        List<DomainEvent> events = List.copyOf(store.getOrDefault(aggregateId, List.of()));
+        List<DomainEvent> events = store.getOrDefault(aggregateId, List.of());
         return new EventStream(events, events.size());
     }
 }

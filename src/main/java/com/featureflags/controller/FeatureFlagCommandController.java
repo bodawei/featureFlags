@@ -60,7 +60,7 @@ public class FeatureFlagCommandController {
     @PatchMapping("/{flagId}/name")
     public ResponseEntity<Void> renameFlag(@PathVariable UUID flagId, @RequestBody @Valid RenameFlagBody body) {
         handler.handle(new RenameFeatureFlagCommand(flagId, body.name()));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{flagId}/environments")
@@ -94,6 +94,6 @@ public class FeatureFlagCommandController {
             @PathVariable UUID variantId,
             @RequestBody @Valid ModifyVariantBody body) {
         handler.handle(new ModifyVariantCommand(flagId, variantId, body.name(), body.value()));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
