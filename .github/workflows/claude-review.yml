@@ -13,7 +13,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - uses: anthropics/claude-code-action@beta
+      - uses: anthropics/claude-code-action
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           # use_sticky_comment: true
