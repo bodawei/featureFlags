@@ -3,17 +3,9 @@ package com.featureflags.event;
 import java.time.Instant;
 import java.util.UUID;
 
-public sealed interface DomainEvent
-    permits FeatureFlagCreatedEvent,
-        FeatureFlagDeletedEvent,
-        FeatureFlagRenamedEvent,
-        EnvironmentAddedEvent,
-        EnvironmentRemovedEvent,
-        VariantAddedEvent,
-        VariantRemovedEvent,
-        VariantModifiedEvent {
+public sealed interface DomainEvent permits FlagEvent, EnvironmentEvent, VariantEvent {
 
-  UUID flagId();
+  UUID aggregateId();
 
   Instant occurredAt();
 }

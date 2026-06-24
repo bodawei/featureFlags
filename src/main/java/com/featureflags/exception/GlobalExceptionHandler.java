@@ -28,10 +28,16 @@ public class GlobalExceptionHandler {
         .body(ProblemDetail.forStatusAndDetail(HttpStatus.GONE, ex.getMessage()));
   }
 
-  @ExceptionHandler({EnvironmentAlreadyExistsException.class, OptimisticConcurrencyException.class})
+  @ExceptionHandler(OptimisticConcurrencyException.class)
   public ResponseEntity<ProblemDetail> handleConflict(FeatureFlagDomainException ex) {
     return ResponseEntity.status(HttpStatus.CONFLICT)
         .body(ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage()));
+  }
+
+  @ExceptionHandler(InvalidReferenceException.class)
+  public ResponseEntity<ProblemDetail> handleInvalidReference(InvalidReferenceException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage()));
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
